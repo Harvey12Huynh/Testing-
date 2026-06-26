@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+dist_v*
+dist_verify
+*.local
+.DS_Store
+.vite
+
+# stray TS/Vite build artifacts
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+vite.config.js.timestamp-*

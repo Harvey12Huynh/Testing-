@@ -1,0 +1,238 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Instrument Serif", serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Dark cinematic anniversary theme */
+  --background: 201 100% 9%;
+  --foreground: 0 0% 100%;
+
+  --muted: 0 0% 10%;
+  --muted-foreground: 240 4% 66%;
+
+  --popover: 201 100% 9%;
+  --popover-foreground: 0 0% 100%;
+
+  --card: 201 60% 12%;
+  --card-foreground: 0 0% 100%;
+
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 4%;
+
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 100%;
+
+  --accent: 0 0% 10%;
+  --accent-foreground: 0 0% 100%;
+
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 43 64% 69%;
+
+  /* Anniversary gold */
+  --gold: 43 64% 69%;
+  --gold-soft: 43 50% 80%;
+
+  --radius: 0.9rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: hsl(var(--gold) / 0.3);
+  color: #fff;
+}
+
+/* ---------- Liquid Glass ---------- */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.liquid-glass-strong {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* gold-tinted glass for anniversary accents */
+.glass-gold::before {
+  background: linear-gradient(
+    180deg,
+    hsl(var(--gold) / 0.6) 0%,
+    hsl(var(--gold) / 0.15) 25%,
+    rgba(255, 255, 255, 0) 50%,
+    hsl(var(--gold) / 0.15) 75%,
+    hsl(var(--gold) / 0.6) 100%
+  );
+}
+
+/* ---------- Animations ---------- */
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-rise {
+  animation: fade-rise 0.8s ease-out both;
+}
+.animate-fade-rise-delay {
+  animation: fade-rise 0.8s ease-out 0.2s both;
+}
+.animate-fade-rise-delay-2 {
+  animation: fade-rise 0.8s ease-out 0.4s both;
+}
+.animate-fade-rise-delay-3 {
+  animation: fade-rise 0.8s ease-out 0.6s both;
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gold-text {
+  background: linear-gradient(
+    100deg,
+    hsl(var(--gold-soft)) 0%,
+    hsl(var(--gold)) 40%,
+    #fff6df 50%,
+    hsl(var(--gold)) 60%,
+    hsl(var(--gold-soft)) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* Tames a bright video so type stays legible and cinematic */
+.hero-video {
+  filter: brightness(0.62) saturate(1.08) contrast(1.04);
+}
+
+/* Flat navy wash to unify any video into the brand palette */
+.hero-tint {
+  background: hsl(var(--background) / 0.42);
+}
+
+/* Soft shadow so text never washes out on light frames */
+.text-cinematic {
+  text-shadow: 0 1px 30px hsl(var(--background) / 0.55),
+    0 1px 3px hsl(var(--background) / 0.4);
+}
+
+.hero-vignette {
+  background:
+    /* focused scrim directly behind the headline */
+    radial-gradient(
+      90% 70% at 50% 46%,
+      hsl(var(--background) / 0.62) 0%,
+      hsl(var(--background) / 0.3) 45%,
+      transparent 75%
+    ),
+    /* outer darkening to seat the type */
+    radial-gradient(
+      130% 100% at 50% 40%,
+      transparent 35%,
+      hsl(var(--background) / 0.7) 100%
+    ),
+    /* top + bottom gradient for nav and section blend */
+    linear-gradient(
+      180deg,
+      hsl(var(--background) / 0.75) 0%,
+      hsl(var(--background) / 0.25) 16%,
+      transparent 38%,
+      transparent 54%,
+      hsl(var(--background) / 0.7) 80%,
+      hsl(var(--background) / 0.98) 100%
+    );
+}
+
+.divider-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--gold) / 0.4),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
